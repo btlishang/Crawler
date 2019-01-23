@@ -8,12 +8,19 @@
 #     https://doc.scrapy.org/en/latest/topics/settings.html
 #     https://doc.scrapy.org/en/latest/topics/downloader-middleware.html
 #     https://doc.scrapy.org/en/latest/topics/spider-middleware.html
+import datetime
 
 BOT_NAME = 'Crawler'
 
 SPIDER_MODULES = ['Crawler.spiders']
 NEWSPIDER_MODULE = 'Crawler.spiders'
 
+# 数据库Mysql
+MYSQL_HOST = ''
+MYSQL_DBNAME = ''
+MYSQL_USER = ''
+MYSQL_PASSWD = ''
+MYSQL_PORT = 3306
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'Crawler (+http://www.yourdomain.com)'
@@ -64,9 +71,10 @@ ROBOTSTXT_OBEY = False
 
 # Configure item pipelines
 # See https://doc.scrapy.org/en/latest/topics/item-pipeline.html
-#ITEM_PIPELINES = {
-#    'Crawler.pipelines.CrawlerPipeline': 300,
-#}
+ITEM_PIPELINES = {
+   # 'Crawler.pipelines.CrawlerPipeline': 300,
+   'Crawler.pipelines.MysqlPipeline': 200,
+}
 
 # Enable and configure the AutoThrottle extension (disabled by default)
 # See https://doc.scrapy.org/en/latest/topics/autothrottle.html
@@ -88,3 +96,10 @@ ROBOTSTXT_OBEY = False
 #HTTPCACHE_DIR = 'httpcache'
 #HTTPCACHE_IGNORE_HTTP_CODES = []
 #HTTPCACHE_STORAGE = 'scrapy.extensions.httpcache.FilesystemCacheStorage'
+
+# 日志配置
+# now = datetime.datetime.now()
+# log_file_path = './scrapy_{}_{}_{}.log'.format(now.year,now.month,now.day)
+# LOG_FILE = log_file_path
+LOG_ENCODING = 'utf-8'
+LOG_LEVEL = 'INFO'
